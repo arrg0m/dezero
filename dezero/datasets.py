@@ -4,7 +4,7 @@ import numpy as np
 
 
 class Dataset:
-    def __init__(self, train=True, transform=True, target_transform=None):
+    def __init__(self, train=True, transform=None, target_transform=None):
         self.train = train
         self.transform = transform
         self.target_transform = target_transform

@@ -1,6 +1,6 @@
 import numpy as np
 from dezero import utils
-from dezero.core import Function
+from dezero.core import Function, Variable, as_array
 from dezero.core import as_variable
 
 class Sin(Function):
@@ -352,3 +352,11 @@ class SoftmaxCrossEntropy(Function):
     
 def softmax_cross_entropy(x, t):
     return SoftmaxCrossEntropy()(x, t)
+
+def accuracy(y, t):
+    y, t = as_variable(y), as_variable(t)
+
+    pred = y.data.argmax(axis=1).reshape(t.shape)
+    result = (pred == t.data)
+    acc = result.mean()
+    return Variable(as_array(acc))
