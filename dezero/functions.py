@@ -314,6 +314,7 @@ class Softmax(Function):
         y = self.outputs[0]()
         gx = y * gy
         sumdx = gx.sum(axis=self.axis, keepdims=True)
+        gx -= y * sumdx
         return gx
     
 def softmax(x, axis=1):
